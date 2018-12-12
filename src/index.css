@@ -18,10 +18,10 @@ body {
 :root {
   --primary-salmon: #ffc0a8;
   --dark-salmon: #f57a7a;
-  --light-salmon: #fbcaca;
+  --light-salmon: rgba(245, 122, 122, 0.4);
 
   --dark-sage: #bbcf95;
-  --light-sage: #bbcf95;
+  --light-sage: rgba(187, 207, 149, 0.6);
 
   --dark-grey: #666666;
   --medium-grey: #979797;
