@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { List } from "../components/List";
+import { List } from "../components//ListTodo/List";
 import { State } from "src/reducers";
 import { toggleTodo, removeTodo } from "src/actions";
 

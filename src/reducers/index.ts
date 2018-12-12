@@ -5,11 +5,13 @@ import { v4 } from "uuid";
 export type State = {
   todos: TodoT[];
   value: string;
+  showAddButton: boolean;
 };
 
 const initialState: State = {
   todos: [],
-  value: ""
+  value: "",
+  showAddButton: false
 };
 
 export const todos = (state: State = initialState, action: any) => {
@@ -44,6 +46,11 @@ export const todos = (state: State = initialState, action: any) => {
       return {
         ...state,
         todos: state.todos.filter(todo => !todo.completed)
+      };
+    case actions.TOGGLE_ADD_BUTTON:
+      return {
+        ...state,
+        showAddButton: action.show
       };
     default:
       return state;

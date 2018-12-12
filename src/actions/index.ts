@@ -3,7 +3,8 @@ export enum actions {
   TOGGLE_TODO = "TOGGLE_TODO",
   REMOVE_TODO = "REMOVE_TODO",
   ONCHANGE_INPUT = "ONCHANGE_INPUT",
-  REMOVE_COMPLETED_TODO = "REMOVE_COMPLETED_TODO"
+  REMOVE_COMPLETED_TODO = "REMOVE_COMPLETED_TODO",
+  TOGGLE_ADD_BUTTON = "TOGGLE_ADD_BUTTON"
 }
 
 export const addTodo = (description: string) => ({
@@ -28,4 +29,9 @@ export const onChangeTodoInput = (value: string) => ({
 
 export const removeCompletedTodo = () => ({
   type: actions.REMOVE_COMPLETED_TODO
+});
+
+export const toggleAddButton = (show: boolean) => ({
+  show,
+  type: actions.TOGGLE_ADD_BUTTON
 });
