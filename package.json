@@ -1,5 +1,7 @@
 {
-  "name": "todolist",
+  "name": "todolist-react-redux",
+  "author": "Laura Marina Bianchi <lauramarinabianchi@gmail.com>",
+  "homepage": "https://lauramarinab.github.io/todolist-react-redux",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,7 +17,9 @@
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "eject": "react-scripts-ts eject",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "@types/jest": "^23.3.5",
@@ -25,6 +29,7 @@
     "@types/react-redux": "^6.0.9",
     "@types/styled-components": "^4.0.3",
     "@types/uuid": "^3.4.4",
+    "gh-pages": "^2.0.1",
     "typescript": "^3.1.3"
   }
 }
