@@ -6,7 +6,7 @@ const Hello = styled.h2`
   color: var(--primary-salmon);
 `;
 
-const HelloLaura: React.SFC<{}> = ({}) => {
+const HelloLaura: React.FC<{}> = ({}) => {
   return <Hello>Hello Laura!</Hello>;
 };
 

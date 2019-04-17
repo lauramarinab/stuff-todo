@@ -1,4 +1,4 @@
-import styled, { StyledFunction } from "styled-components";
+import styled from "styled-components";
 
 const TitleSection = styled.span`
   color: var(--dark-salmon);
@@ -12,12 +12,11 @@ const TodoWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const textTodo: StyledFunction<{ completed: boolean }> = styled.span;
-const TextTodo = textTodo`
+const TextTodo = styled.span<{ completed: boolean }>`
   color: var(--dark-grey);
   font-size: 15px;
   margin-left: 10px;
-  text-decoration: ${props => (props.completed ? "line-through" : "none")}
+  text-decoration: ${props => (props.completed ? "line-through" : "none")};
 `;
 
 export { TitleSection, TodoWrapper, TextTodo };

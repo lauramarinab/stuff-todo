@@ -18,11 +18,9 @@ export const todos = (state: State = initialState, action: any) => {
   switch (action.type) {
     case actions.ADD_TODO:
       return {
+        ...state,
         value: "",
-        todos: [
-          ...state.todos,
-          { id: v4(), description: action.description, completed: false }
-        ]
+        todos: [...state.todos, { id: v4(), description: action.description, completed: false }]
       };
     case actions.REMOVE_TODO:
       return {

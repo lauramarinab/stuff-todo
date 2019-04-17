@@ -1,9 +1,6 @@
-import styled, { StyledFunction } from "styled-components";
+import styled from "styled-components";
 
-const inputStyled: StyledFunction<
-  { showAddButton: boolean } & React.HTMLProps<HTMLInputElement>
-> = styled.input;
-const InputStyled = inputStyled`
+const InputStyled = styled.input<{ showAddButton: boolean } & React.HTMLProps<HTMLInputElement>>`
   height: 40px;
   border: none;
   font-size: 20px;

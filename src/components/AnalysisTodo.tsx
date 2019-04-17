@@ -1,6 +1,7 @@
 import * as React from "react";
-import { TodoT } from "src/types/Todo";
 import styled from "styled-components";
+import { TodoT } from "src/types/Todo";
+import { CSSTransition } from "react-transition-group";
 
 const AnalysisWrapper = styled.div`
   display: flex;
@@ -16,6 +17,22 @@ const AnalysisWrapper = styled.div`
     font-size: 16px;
     padding: 0px 20px;
   }
+
+  opacity: 0;
+  transition: opacity 0.3s;
+
+  &.wrapper-entering {
+    opacity: 0;
+  }
+  &.wrapper-entered {
+    opacity: 1;
+  }
+  &.wrapper-exiting {
+    opacity: 0;
+  }
+  &.wrapper-exited {
+    opacity: 0;
+  }
 `;
 
 type Props = {
@@ -29,7 +46,7 @@ const perCentNotCompleted = (todos: number, notCompleted: number) => {
   return "100";
 };
 
-const AnalysisTodo: React.SFC<Props> = ({ todos }) => {
+const AnalysisTodo: React.FC<Props> = ({ todos }) => {
   const allTodos = todos.length;
   const completedTodos = todos.filter(t => t.completed).length;
 
@@ -38,11 +55,15 @@ const AnalysisTodo: React.SFC<Props> = ({ todos }) => {
   const perCent = perCentNotCompleted(allTodos, notCompletedTodos);
 
   return (
-    <AnalysisWrapper>
-      <span>{`${allTodos} - to do`}</span>
-      <span>{`${completedTodos} - completate`}</span>
-      <span>{`${perCent}% da completare`}</span>
-    </AnalysisWrapper>
+    <CSSTransition in={todos.length > 0} timeout={{ enter: 300, exit: 500 }} classNames="">
+      {status => (
+        <AnalysisWrapper className={`wrapper-${status}`}>
+          <span>{`${allTodos} - to do`}</span>
+          <span>{`${completedTodos} - completate`}</span>
+          <span>{`${perCent}% da completare`}</span>
+        </AnalysisWrapper>
+      )}
+    </CSSTransition>
   );
 };
 

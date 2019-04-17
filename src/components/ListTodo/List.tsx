@@ -1,7 +1,7 @@
 import * as React from "react";
 import { TodoT } from "./../../types/Todo";
 import { Todo } from "./Todo";
-import { TitleSection } from "./style";
+import { TitleSection } from "./styles";
 
 interface Props {
   todos: TodoT[];
@@ -9,7 +9,7 @@ interface Props {
   onRemove: (id: string) => void;
 }
 
-const List: React.SFC<Props> = ({ todos, onToggle, onRemove }) => {
+const List: React.FC<Props> = ({ todos, onToggle, onRemove }) => {
   return (
     <div style={{ marginTop: 50 }}>
       <TitleSection>All to do</TitleSection>
