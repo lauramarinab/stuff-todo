@@ -11,7 +11,6 @@ interface Props {
   todos: Array<TodoT>;
   onChangeInput: (value: string) => void;
   onAddTodo: (description: string) => void;
-  removeCompletedTodo: () => void;
   toggleAddButton: (show: boolean) => void;
 }
 
@@ -21,11 +20,9 @@ const Input: React.FC<Props> = ({
   todos,
   onChangeInput,
   onAddTodo,
-  removeCompletedTodo,
+
   toggleAddButton
 }) => {
-  const isCompleted = todos.find(t => t.completed);
-
   return (
     <>
       <InputWrapper>
@@ -42,7 +39,6 @@ const Input: React.FC<Props> = ({
         />
         {showAddButton && <img src={plus} onClick={() => value !== "" && onAddTodo(value)} />}
       </InputWrapper>
-      {isCompleted && <button onClick={() => removeCompletedTodo()}>remove all completed to do</button>}
     </>
   );
 };
