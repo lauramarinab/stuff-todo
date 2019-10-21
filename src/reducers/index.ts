@@ -3,13 +3,19 @@ import { actions } from "./../actions/index";
 import { v4 } from "uuid";
 
 export type State = {
-  todos: TodoT[];
+  todos: Array<TodoT>;
   value: string;
   showAddButton: boolean;
 };
 
+const initialTodoState: Array<TodoT> = [
+  { id: v4(), description: "Comprare il pane", completed: false, trash: false, category: null },
+  { id: v4(), description: "Comprare la farina", completed: true, trash: false, category: null },
+  { id: v4(), description: "Comprare acqua", completed: true, trash: false, category: null }
+];
+
 const initialState: State = {
-  todos: [],
+  todos: initialTodoState,
   value: "",
   showAddButton: false
 };
@@ -20,7 +26,10 @@ export const todos = (state: State = initialState, action: any) => {
       return {
         ...state,
         value: "",
-        todos: [...state.todos, { id: v4(), description: action.description, completed: false }]
+        todos: [
+          ...state.todos,
+          { id: v4(), description: action.description, completed: false, trash: false, category: null }
+        ]
       };
     case actions.REMOVE_TODO:
       return {

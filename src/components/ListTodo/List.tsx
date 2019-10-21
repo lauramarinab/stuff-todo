@@ -16,10 +16,10 @@ const List: React.FC<Props> = ({ todos, onToggle, onRemove }) => {
       <div style={{ marginTop: 10, width: "460px" }}>
         {todos.map(todo => (
           <Todo
-            completed={todo.completed}
-            description={todo.description}
             key={todo.id}
             id={todo.id}
+            completed={todo.completed}
+            description={todo.description}
             onToggle={onToggle}
             onRemove={onRemove}
           />

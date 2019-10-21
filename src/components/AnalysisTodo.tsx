@@ -6,7 +6,7 @@ import { CSSTransition } from "react-transition-group";
 const AnalysisWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin: 15px 0px 40px;
+  margin: 15px 0px 25px;
   & > span {
     font-size: 12px;
     color: var(--dark-grey);
@@ -55,7 +55,7 @@ const AnalysisTodo: React.FC<Props> = ({ todos }) => {
   const perCent = perCentNotCompleted(allTodos, notCompletedTodos);
 
   return (
-    <CSSTransition in={todos.length > 0} timeout={{ enter: 300, exit: 500 }} classNames="">
+    <CSSTransition in={todos.length > 0} timeout={{ enter: 300, exit: 500 }}>
       {status => (
         <AnalysisWrapper className={`wrapper-${status}`}>
           <span>{`${allTodos} - to do`}</span>

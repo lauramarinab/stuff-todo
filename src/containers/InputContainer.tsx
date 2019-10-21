@@ -6,7 +6,6 @@ import { addTodo, onChangeTodoInput, toggleAddButton } from "src/actions";
 const mapStateToProps = (state: State) => {
   return {
     value: state.value,
-    todos: state.todos,
     showAddButton: state.showAddButton
   };
 };
