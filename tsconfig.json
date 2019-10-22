@@ -4,8 +4,14 @@
     "outDir": "build/dist",
     "module": "esnext",
     "target": "es5",
-    "lib": ["es6", "dom"],
-    "types": ["react", "jest"],
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "types": [
+      "react",
+      "jest"
+    ],
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react",
@@ -27,5 +33,16 @@
     "noEmit": true,
     "resolveJsonModule": true
   },
-  "exclude": ["node_modules", "build", "scripts", "acceptance-tests", "webpack", "jest", "src/setupTests.ts"]
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts",
+    "acceptance-tests",
+    "webpack",
+    "jest",
+    "src/setupTests.ts"
+  ],
+  "include": [
+    "src"
+  ]
 }
