@@ -7,9 +7,9 @@ const pallino = require("../../assets/icon/pallino.svg");
 const checkedPallino = require("../../assets/icon/checked-pallino.svg");
 const remove = require("../../assets/icon/remove.svg");
 
-type SimplifyTodoProps = Omit<TodoT, "category" | "trash">;
+type SimplifiedTodoProps = Omit<TodoT, "category" | "trash">;
 
-type Props = SimplifyTodoProps & {
+type Props = SimplifiedTodoProps & {
   onToggle: (id: string) => void;
   onRemove: (id: string) => void;
 };
@@ -18,14 +18,8 @@ const Todo: React.FC<Props> = ({ id, description, completed, onToggle, onRemove 
   const [overlayButton, setOverlayButton] = React.useState(false);
   const [todoIsVisible, setTodoIsVisible] = React.useState(true);
 
-  React.useEffect(() => {
-    if (!todoIsVisible) {
-      setTimeout(() => onRemove(id), 400);
-    }
-  }, [todoIsVisible]);
-
   return (
-    <CSSTransition in={todoIsVisible} timeout={{ enter: 300, exit: 400 }}>
+    <CSSTransition in={todoIsVisible} timeout={{ enter: 300, exit: 400 }} onExited={() => onRemove(id)}>
       {status => (
         <TodoWrapper
           onClick={() => onToggle(id)}

@@ -12,12 +12,12 @@ const TodoWrapper = styled.div`
   align-items: center;
   padding: 5px 0px;
   justify-content: space-between;
-
+  z-index: 0;
   position: relative;
+
   opacity: 0;
   left: -600px;
-  transition: opacity 0.3s, left 0.5s;
-  z-index: 0;
+  transition: opacity 0.3s, left 0.4s;
 
   &.wrapper-entering {
     opacity: 0;
