@@ -6,9 +6,18 @@ import { InputContainer } from "./containers/InputContainer";
 import { HelloLaura } from "./components/HelloLaura";
 import { List } from "./components/ListTodo/List";
 import { AnalysisTodo } from "./components/AnalysisTodo";
+import client from "src/client";
 
 const App: React.FC = () => {
   const { data, error } = useSWR<Array<TodoT>>("/todo", fetch);
+
+  const onTrash = async (id: string) => {
+    await client.patch(`todo/${id}`, { trash: true });
+  };
+
+  const onComplete = async (id: string, completed: boolean) => {
+    await client.patch(`todo/${id}`, { completed });
+  };
 
   if (error) {
     return <div>error!</div>;
@@ -23,7 +32,7 @@ const App: React.FC = () => {
       <HelloLaura />
       <AnalysisTodo todos={data} />
       <InputContainer />
-      <List todos={data} onRemove={() => console.log("ciaone")} onToggle={() => console.log("ciaone")} />
+      <List todos={data} onComplete={onComplete} onTrash={onTrash} />
     </>
   );
 };
