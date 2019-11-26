@@ -1,20 +1,31 @@
 import * as React from "react";
-import { ListContainer } from "./containers/ListContainer";
+import useSWR from "swr";
+import { fetch } from "src/client";
+import { TodoT } from "src/types/Todo";
 import { InputContainer } from "./containers/InputContainer";
 import { HelloLaura } from "./components/HelloLaura";
-import { AnalysisTodoContainer } from "./containers/AnalysisTodoContainer";
+import { List } from "./components/ListTodo/List";
+import { AnalysisTodo } from "./components/AnalysisTodo";
 
-class App extends React.Component {
-  public render() {
-    return (
-      <>
-        <HelloLaura />
-        <AnalysisTodoContainer />
-        <InputContainer />
-        <ListContainer />
-      </>
-    );
+const App: React.FC = () => {
+  const { data, error } = useSWR<Array<TodoT>>("/todo", fetch);
+
+  if (error) {
+    return <div>error!</div>;
   }
-}
+
+  if (!data) {
+    return <div>loading!</div>;
+  }
+
+  return (
+    <>
+      <HelloLaura />
+      <AnalysisTodo todos={data} />
+      <InputContainer />
+      <List todos={data} onRemove={() => console.log("ciaone")} onToggle={() => console.log("ciaone")} />
+    </>
+  );
+};
 
 export default App;
