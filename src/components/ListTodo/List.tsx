@@ -5,11 +5,11 @@ import { TitleSection } from "./styles";
 
 interface Props {
   todos: TodoT[];
-  onToggle: (id: string) => void;
-  onRemove: (id: string) => void;
+  onComplete: (id: string, completed: boolean) => void;
+  onTrash: (id: string) => void;
 }
 
-const List: React.FC<Props> = ({ todos, onToggle, onRemove }) => {
+const List: React.FC<Props> = ({ todos, onComplete, onTrash }) => {
   return (
     <div style={{ marginTop: 50 }}>
       <TitleSection>All to do</TitleSection>
@@ -20,8 +20,8 @@ const List: React.FC<Props> = ({ todos, onToggle, onRemove }) => {
             id={todo.id}
             completed={todo.completed}
             description={todo.description}
-            onToggle={onToggle}
-            onRemove={onRemove}
+            onComplete={onComplete}
+            onTrash={onTrash}
           />
         ))}
       </div>

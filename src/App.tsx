@@ -1,20 +1,59 @@
 import * as React from "react";
-import { ListContainer } from "./containers/ListContainer";
-import { InputContainer } from "./containers/InputContainer";
+import useSWR, { trigger } from "swr";
+import { fetch } from "./client";
+import { TodoT } from "./types/Todo";
 import { HelloLaura } from "./components/HelloLaura";
-import { AnalysisTodoContainer } from "./containers/AnalysisTodoContainer";
+import { List } from "./components/ListTodo/List";
+import { AnalysisTodo } from "./components/AnalysisTodo";
+import client from "./client";
+import { Input } from "./components/Input/Input";
 
-class App extends React.Component {
-  public render() {
-    return (
-      <>
-        <HelloLaura />
-        <AnalysisTodoContainer />
-        <InputContainer />
-        <ListContainer />
-      </>
-    );
+const App: React.FC = () => {
+  const { data, error } = useSWR<Array<TodoT>>("/todo", fetch);
+
+  const onTrash = async (id: string) => {
+    try {
+      await client.patch(`/todo/${id}`, { trash: true });
+      trigger("/todo");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const onComplete = async (id: string, completed: boolean) => {
+    try {
+      await client.patch(`/todo/${id}`, { completed });
+      trigger("/todo");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const onCreateTodo = async (description: string) => {
+    try {
+      await client.post("/todo/", { description });
+      trigger("/todo");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  if (error) {
+    return <div>error!</div>;
   }
-}
+
+  if (!data) {
+    return <div>loading!</div>;
+  }
+
+  return (
+    <>
+      <HelloLaura />
+      <AnalysisTodo todos={data} />
+      <Input onCreateTodo={onCreateTodo} />
+      <List todos={data} onComplete={onComplete} onTrash={onTrash} />
+    </>
+  );
+};
 
 export default App;

@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
-import { TodoT } from "src/types/Todo";
 import { CSSTransition } from "react-transition-group";
+import { TodoT } from "../types/Todo";
 
 const AnalysisWrapper = styled.div`
   display: flex;

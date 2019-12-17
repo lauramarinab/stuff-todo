@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TodoT } from "src/types/Todo";
+import { TodoT } from "../types/Todo";
 import { CSSTransition } from "react-transition-group";
 import styled from "styled-components";
 

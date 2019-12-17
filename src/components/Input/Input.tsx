@@ -5,28 +5,36 @@ const plus = require("../../assets/icon/plus.svg");
 const pallino = require("../../assets/icon/pallino.svg");
 
 interface Props {
-  value: string;
-  showAddButton: boolean;
-  onChangeInput: (value: string) => void;
-  onAddTodo: (description: string) => void;
-  toggleAddButton: (show: boolean) => void;
+  onCreateTodo: (description: string) => void;
 }
 
-const Input: React.FC<Props> = ({ value, showAddButton, onChangeInput, onAddTodo, toggleAddButton }) => {
+const Input: React.FC<Props> = ({ onCreateTodo }) => {
+  const [inputValue, setInputValue] = React.useState<string>("");
+  const [showAddButton, setShowAddButton] = React.useState<boolean>(false);
+
+  const onCreate = () => {
+    if (inputValue !== "") {
+      onCreateTodo(inputValue);
+      setInputValue("");
+    } else {
+      console.log("Devi scrivere un'attività prima di creare un todo");
+    }
+  };
+
   return (
     <InputWrapper>
-      {showAddButton && <img src={pallino} />}
+      {showAddButton && <img src={pallino} alt="" />}
       <InputStyled
         type="text"
-        value={value}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeInput(e.target.value)}
+        value={inputValue}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
         placeholder="Cosa devi fare oggi?"
-        onKeyPress={e => (e.key === "Enter" && value !== "" ? onAddTodo(value) : null)}
-        onFocus={() => toggleAddButton(true)}
-        onBlur={() => value === "" && toggleAddButton(false)}
+        onKeyPress={e => e.key === "Enter" && onCreate()}
+        onFocus={() => setShowAddButton(true)}
+        onBlur={() => inputValue === "" && setShowAddButton(false)}
         showAddButton={showAddButton}
       />
-      {showAddButton && <img src={plus} onClick={() => value !== "" && onAddTodo(value)} />}
+      {showAddButton && <img alt="" src={plus} style={{ cursor: "pointer" }} onClick={onCreate} />}
     </InputWrapper>
   );
 };
