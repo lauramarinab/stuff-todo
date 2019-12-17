@@ -1,48 +1,41 @@
 {
-  "name": "todolist-react-redux",
-  "author": "Laura Marina Bianchi <lauramarinabianchi@gmail.com>",
-  "homepage": "https://lauramarinab.github.io/todolist-react-redux",
+  "name": "todo",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.3.0",
+    "typescript": "~3.7.2",
     "axios": "^0.19.0",
     "cors": "^2.8.5",
     "flubber": "^0.4.2",
     "popmotion": "^8.7.0",
-    "react": "16.10.2",
-    "react-dom": "16.10.2",
-    "react-pose": "^4.0.8",
-    "react-redux": "7.1.1",
-    "react-scripts": "3.2.0",
     "react-transition-group": "4.3.0",
-    "redux": "4.0.4",
     "styled-components": "4.4.0",
     "swr": "^0.1.12",
     "uuid": "3.3.3"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "devDependencies": {
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@types/react-transition-group": "4.2.3",
+    "@types/styled-components": "4.1.19",
+    "gh-pages": "2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "devDependencies": {
-    "@types/jest": "24.0.19",
-    "@types/node": "12.11.1",
-    "@types/react": "16.9.7",
-    "@types/react-dom": "16.9.2",
-    "@types/react-redux": "7.1.4",
-    "@types/react-transition-group": "4.2.3",
-    "@types/styled-components": "4.1.19",
-    "@types/uuid": "3.4.5",
-    "gh-pages": "2.1.1",
-    "prettier": "1.18.2",
-    "typescript": "3.6.4"
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "browserslist": {
     "production": [

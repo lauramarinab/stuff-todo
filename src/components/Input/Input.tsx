@@ -14,7 +14,7 @@ const Input: React.FC<Props> = ({ onCreateTodo }) => {
 
   return (
     <InputWrapper>
-      {showAddButton && <img src={pallino} />}
+      {showAddButton && <img src={pallino} alt="" />}
       <InputStyled
         type="text"
         value={inputValue}
@@ -27,6 +27,7 @@ const Input: React.FC<Props> = ({ onCreateTodo }) => {
       />
       {showAddButton && (
         <img
+          alt=""
           src={plus}
           style={{ cursor: "pointer" }}
           onClick={() => {

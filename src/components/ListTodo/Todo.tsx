@@ -1,7 +1,7 @@
 import * as React from "react";
-import { TodoT } from "src/types/Todo";
 import { TodoWrapper, TextTodo } from "./styles";
 import { CSSTransition } from "react-transition-group";
+import { TodoT } from "../../types/Todo";
 
 const pallino = require("../../assets/icon/pallino.svg");
 const checkedPallino = require("../../assets/icon/checked-pallino.svg");
