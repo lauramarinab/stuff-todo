@@ -20,7 +20,7 @@ const List: React.FC<Props> = ({ todos, onComplete, onTrash }) => {
             id={todo.id}
             completed={todo.completed}
             description={todo.description}
-            onComplete={onComplete}
+            onComplete={() => onComplete(todo.id, !todo.completed)}
             onTrash={onTrash}
           />
         ))}

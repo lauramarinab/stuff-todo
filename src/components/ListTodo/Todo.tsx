@@ -23,7 +23,6 @@ const Todo: React.FC<Props> = ({ id, description, completed, onTrash, onComplete
       {status => (
         <TodoWrapper
           onClick={() => onComplete(id, !completed)}
-          style={{ cursor: "pointer" }}
           className={`wrapper-${status}`}
           onMouseEnter={() => setOverlayButton(true)}
           onMouseLeave={() => setOverlayButton(false)}

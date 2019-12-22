@@ -14,10 +14,17 @@ const TodoWrapper = styled.div`
   justify-content: space-between;
   z-index: 0;
   position: relative;
-
   opacity: 0;
   left: -600px;
-  transition: opacity 0.3s, left 0.4s;
+  cursor: pointer;
+  padding: 10px 15px;
+  background: #ffffff;
+  border-radius: 50px;
+  transition: opacity 0.3s, left 0.4s, background 0.2s ease-in;
+
+  &:hover {
+    background: #f3f3f3;
+  }
 
   &.wrapper-entering {
     opacity: 0;

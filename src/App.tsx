@@ -1,6 +1,6 @@
 import * as React from "react";
 import useSWR, { trigger } from "swr";
-import { fetch } from "./client";
+import { fetchData } from "./client";
 import { TodoT } from "./types/Todo";
 import { HelloLaura } from "./components/HelloLaura";
 import { List } from "./components/ListTodo/List";
@@ -9,7 +9,7 @@ import client from "./client";
 import { Input } from "./components/Input/Input";
 
 const App: React.FC = () => {
-  const { data, error } = useSWR<Array<TodoT>>("/todo", fetch);
+  const { data, error } = useSWR<Array<TodoT>>("/todo", fetchData);
 
   const onTrash = async (id: string) => {
     try {
@@ -29,9 +29,9 @@ const App: React.FC = () => {
     }
   };
 
-  const onCreateTodo = async (description: string) => {
+  const onCreateTodo = async (description: string, categoryId: number | null) => {
     try {
-      await client.post("/todo/", { description });
+      await client.post("/todo/", { description, categoryId });
       trigger("/todo");
     } catch (err) {
       console.log(err);
@@ -51,7 +51,7 @@ const App: React.FC = () => {
       <HelloLaura />
       <AnalysisTodo todos={data} />
       <Input onCreateTodo={onCreateTodo} />
-      <List todos={data} onComplete={onComplete} onTrash={onTrash} />
+      <List todos={data} onComplete={(id, completed) => onComplete(id, completed)} onTrash={onTrash} />
     </>
   );
 };
