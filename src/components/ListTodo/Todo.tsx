@@ -7,7 +7,7 @@ const pallino = require("../../assets/icon/pallino.svg");
 const checkedPallino = require("../../assets/icon/checked-pallino.svg");
 const remove = require("../../assets/icon/remove.svg");
 
-type SimplifiedTodoProps = Omit<TodoT, "category" | "trash">;
+type SimplifiedTodoProps = Omit<TodoT, "category_name" | "trash" | "user_name">;
 
 type Props = SimplifiedTodoProps & {
   onTrash: (id: string) => void;
@@ -19,7 +19,7 @@ const Todo: React.FC<Props> = ({ id, description, completed, onTrash, onComplete
   const [todoIsVisible, setTodoIsVisible] = React.useState(true);
 
   return (
-    <CSSTransition in={todoIsVisible} timeout={{ enter: 300, exit: 400 }} onExited={() => onTrash(id)} unmountOnExit>
+    <CSSTransition in={todoIsVisible} timeout={{ enter: 300, exit: 300 }} onExited={() => onTrash(id)} unmountOnExit>
       {status => (
         <TodoWrapper
           onClick={() => onComplete(id, !completed)}

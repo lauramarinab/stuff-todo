@@ -1,6 +1,6 @@
 import * as React from "react";
 import { InputStyled, InputWrapper } from "./styles";
-import { CategoryBox } from "../CategoryBox";
+import { AllCategoryBox } from "../AllCategoryBox";
 
 const plus = require("../../assets/icon/plus.svg");
 const pallino = require("../../assets/icon/pallino.svg");
@@ -23,8 +23,6 @@ const Input: React.FC<Props> = ({ onCreateTodo }) => {
     }
   };
 
-  console.log(selectedCategory);
-
   return (
     <>
       <InputWrapper>
@@ -41,7 +39,7 @@ const Input: React.FC<Props> = ({ onCreateTodo }) => {
         />
         {showAddButton && <img alt="" src={plus} style={{ cursor: "pointer" }} onClick={onCreate} />}
       </InputWrapper>
-      <CategoryBox
+      <AllCategoryBox
         onSelectedCategory={categoryId => setSelectedCategory(categoryId)}
         selectedCategory={selectedCategory}
       />

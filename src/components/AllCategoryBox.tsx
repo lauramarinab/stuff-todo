@@ -53,7 +53,7 @@ interface Props {
   onSelectedCategory: (categoryId: number) => void;
 }
 
-const CategoryBox: React.FC<Props> = ({ selectedCategory, onSelectedCategory }) => {
+const AllCategoryBox: React.FC<Props> = ({ selectedCategory, onSelectedCategory }) => {
   const { data, error } = useSWR<Array<Category>>("/category", fetchData);
 
   if (error) {
@@ -88,4 +88,4 @@ const CategoryBox: React.FC<Props> = ({ selectedCategory, onSelectedCategory }) 
   );
 };
 
-export { CategoryBox };
+export { AllCategoryBox };

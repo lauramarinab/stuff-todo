@@ -3,5 +3,6 @@ export type TodoT = {
   description: string;
   completed: boolean;
   trash: boolean;
-  category: null;
+  category_name: string;
+  user_name: string;
 };

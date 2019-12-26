@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const TitleSection = styled.div`
+const TitleSection = styled.h3`
   color: var(--dark-salmon);
   font-size: 15px;
   background: white;
@@ -15,12 +15,12 @@ const TodoWrapper = styled.div`
   z-index: 0;
   position: relative;
   opacity: 0;
-  left: -600px;
+  top: -45px;
   cursor: pointer;
-  padding: 10px 15px;
+  padding: 8px 13px;
   background: #ffffff;
   border-radius: 50px;
-  transition: opacity 0.3s, left 0.4s, background 0.2s ease-in;
+  transition: opacity 0.2s, top 0.3s, background 0.2s ease-in;
 
   &:hover {
     background: #f3f3f3;
@@ -28,19 +28,19 @@ const TodoWrapper = styled.div`
 
   &.wrapper-entering {
     opacity: 0;
-    left: -600px;
+    top: -45px;
   }
   &.wrapper-entered {
     opacity: 1;
-    left: 0px;
+    top: 0px;
   }
   &.wrapper-exting {
     opacity: 0;
-    left: -600px;
+    top: -45px;
   }
   &.wrapper-exited {
     opacity: 0;
-    left: -600px;
+    top: -45px;
   }
 `;
 
@@ -51,4 +51,11 @@ const TextTodo = styled.span<{ completed: boolean }>`
   text-decoration: ${props => (props.completed ? "line-through" : "none")};
 `;
 
-export { TitleSection, TodoWrapper, TextTodo };
+const GridList = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+`;
+
+export { TitleSection, TodoWrapper, TextTodo, GridList };
