@@ -17,9 +17,10 @@ interface Props {
   todos: Array<TodoT>;
   onComplete: (id: string, completed: boolean) => void;
   onTrash: (id: string) => void;
+  onEditDescription: (id: string, description: string) => void;
 }
 
-const ListBox: React.FC<Props> = ({ todos, onComplete, onTrash }) => {
+const ListBox: React.FC<Props> = ({ todos, onComplete, onTrash, onEditDescription }) => {
   const categoryName = todos[0].category_name;
 
   const maxTodos = todos.slice(0, 4);
@@ -34,8 +35,9 @@ const ListBox: React.FC<Props> = ({ todos, onComplete, onTrash }) => {
             id={todo.id}
             completed={todo.completed}
             description={todo.description}
-            onComplete={() => onComplete(todo.id, !todo.completed)}
+            onComplete={onComplete}
             onTrash={onTrash}
+            onEditDescription={onEditDescription}
           />
         ))}
       </div>

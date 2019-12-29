@@ -11,9 +11,10 @@ interface Props {
   todos: TodoT[];
   onComplete: (id: string, completed: boolean) => void;
   onTrash: (id: string) => void;
+  onEditDescription: (id: string, description: string) => void;
 }
 
-const List: React.FC<Props> = ({ todos, onComplete, onTrash }) => {
+const List: React.FC<Props> = ({ todos, onComplete, onTrash, onEditDescription }) => {
   const allTodosGroupByCategoryName = groupBy(orderBy(todos, CATEGORY_NAME), CATEGORY_NAME);
 
   const notCategorizedTodos = allTodosGroupByCategoryName["Tutte"];
@@ -31,14 +32,21 @@ const List: React.FC<Props> = ({ todos, onComplete, onTrash }) => {
             id={todo.id}
             completed={todo.completed}
             description={todo.description}
-            onComplete={() => onComplete(todo.id, !todo.completed)}
+            onComplete={onComplete}
             onTrash={onTrash}
+            onEditDescription={onEditDescription}
           />
         ))}
       </div>
       <GridList>
         {todosGroupByCategories.map((todos, i) => (
-          <ListBox key={i} todos={todos} onComplete={(id, completed) => onComplete(id, !completed)} onTrash={onTrash} />
+          <ListBox
+            key={i}
+            todos={todos}
+            onComplete={onComplete}
+            onTrash={onTrash}
+            onEditDescription={onEditDescription}
+          />
         ))}
       </GridList>
     </div>

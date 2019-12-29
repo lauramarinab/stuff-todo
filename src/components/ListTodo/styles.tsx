@@ -44,11 +44,12 @@ const TodoWrapper = styled.div`
   }
 `;
 
-const TextTodo = styled.span<{ completed: boolean }>`
+const TextTodo = styled.div<{ completed: boolean }>`
   color: var(--dark-grey);
   font-size: 15px;
   margin-left: 10px;
   text-decoration: ${props => (props.completed ? "line-through" : "none")};
+  outline: none;
 `;
 
 const GridList = styled.div`

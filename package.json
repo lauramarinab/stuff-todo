@@ -28,6 +28,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-transition-group": "4.2.3",
     "@types/styled-components": "4.1.19",
+    "@types/uuid": "^3.4.6",
     "gh-pages": "2.1.1"
   },
   "scripts": {

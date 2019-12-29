@@ -29,6 +29,15 @@ const App: React.FC = () => {
     }
   };
 
+  const onEditDescription = async (id: string, description: string) => {
+    try {
+      await client.patch(`/todo/${id}`, { description });
+      trigger("/todo");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const onCreateTodo = async (description: string, categoryId: number | null) => {
     try {
       await client.post("/todo/", { description, categoryId });
@@ -51,7 +60,12 @@ const App: React.FC = () => {
       <HelloLaura />
       <AnalysisTodo todos={data} />
       <Input onCreateTodo={onCreateTodo} />
-      <List todos={data} onComplete={(id, completed) => onComplete(id, completed)} onTrash={onTrash} />
+      <List
+        todos={data}
+        onComplete={(id, completed) => onComplete(id, completed)}
+        onTrash={onTrash}
+        onEditDescription={(id, description) => onEditDescription(id, description)}
+      />
     </>
   );
 };
