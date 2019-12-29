@@ -17,7 +17,7 @@ const TodoWrapper = styled.div`
   opacity: 0;
   top: -45px;
   cursor: pointer;
-  padding: 8px 13px;
+  padding: 6px 13px;
   background: #ffffff;
   border-radius: 50px;
   transition: opacity 0.2s, top 0.3s, background 0.2s ease-in;

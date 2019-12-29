@@ -1,9 +1,7 @@
 import * as React from "react";
 import { InputStyled, InputWrapper } from "./styles";
 import { AllCategoryBox } from "../AllCategoryBox";
-
-const plus = require("../../assets/icon/plus.svg");
-const pallino = require("../../assets/icon/pallino.svg");
+import { Icon } from "../UI/Icon";
 
 interface Props {
   onCreateTodo: (description: string, categoryId: number | null) => void;
@@ -26,7 +24,7 @@ const Input: React.FC<Props> = ({ onCreateTodo }) => {
   return (
     <>
       <InputWrapper>
-        {showAddButton && <img src={pallino} alt="" />}
+        {showAddButton && <Icon name="check-off" />}
         <InputStyled
           type="text"
           value={inputValue}
@@ -37,7 +35,7 @@ const Input: React.FC<Props> = ({ onCreateTodo }) => {
           onBlur={() => inputValue === "" && setShowAddButton(false)}
           showAddButton={showAddButton}
         />
-        {showAddButton && <img alt="" src={plus} style={{ cursor: "pointer" }} onClick={onCreate} />}
+        {showAddButton && <Icon name="add" onClick={onCreate} />}
       </InputWrapper>
       <AllCategoryBox
         onSelectedCategory={categoryId => setSelectedCategory(categoryId)}

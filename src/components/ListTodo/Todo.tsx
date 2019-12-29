@@ -2,10 +2,7 @@ import * as React from "react";
 import { TodoWrapper, TextTodo } from "./styles";
 import { CSSTransition } from "react-transition-group";
 import { TodoT } from "../../types/Todo";
-
-const pallino = require("../../assets/icon/pallino.svg");
-const checkedPallino = require("../../assets/icon/checked-pallino.svg");
-const remove = require("../../assets/icon/remove.svg");
+import { Icon } from "../UI/Icon";
 
 type SimplifiedTodoProps = Omit<TodoT, "category_name" | "trash" | "user_name">;
 
@@ -28,10 +25,10 @@ const Todo: React.FC<Props> = ({ id, description, completed, onTrash, onComplete
           onMouseLeave={() => setOverlayButton(false)}
         >
           <div style={{ display: "flex", alignItems: "center" }}>
-            {completed ? <img src={checkedPallino} /> : <img src={pallino} />}
+            {completed ? <Icon name="check-on" /> : <Icon name="check-off" />}
             <TextTodo completed={completed}>{description}</TextTodo>
           </div>
-          {overlayButton && <img src={remove} onClick={() => setTodoIsVisible(false)} />}
+          {overlayButton && <Icon name="remove" onClick={() => setTodoIsVisible(false)} />}
         </TodoWrapper>
       )}
     </CSSTransition>

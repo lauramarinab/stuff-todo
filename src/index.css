@@ -27,3 +27,11 @@ body {
   --medium-grey: #979797;
   --light-grey: #d7d7d7;
 }
+
+i::before {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 25px !important;
+  width: 25px !important;
+  height: 25px !important;
+}
