@@ -20,7 +20,7 @@ const Todo: React.FC<Props> = ({ id, description, completed, onTrash, onComplete
   const [todoIsVisible, setTodoIsVisible] = React.useState(true);
   const [todoIsEditable, setTodoIsEditable] = React.useState(false);
 
-  const onBlurTodo = () => {
+  const onBlurEditTodo = () => {
     const todoDiv = document.getElementById(todoId.current);
 
     if (todoDiv) {
@@ -39,21 +39,24 @@ const Todo: React.FC<Props> = ({ id, description, completed, onTrash, onComplete
     <CSSTransition in={todoIsVisible} timeout={{ enter: 300, exit: 300 }} onExited={() => onTrash(id)} unmountOnExit>
       {status => (
         <TodoWrapper
-          onClick={() => !todoIsEditable && onComplete(id, !completed)}
           onDoubleClick={_ => setTodoIsEditable(true)}
           className={`wrapper-${status}`}
           onMouseEnter={() => setOverlayButton(true)}
           onMouseLeave={() => setOverlayButton(false)}
         >
           <div style={{ display: "flex", alignItems: "center" }}>
-            {completed ? <Icon name="check-on" /> : <Icon name="check-off" />}
+            {completed ? (
+              <Icon name="check-on" onClick={() => onComplete(id, false)} />
+            ) : (
+              <Icon name="check-off" onClick={() => onComplete(id, true)} />
+            )}
             <TextTodo
               id={todoId.current}
               completed={completed}
               contentEditable={todoIsEditable}
               onBlur={_ => {
                 setTodoIsEditable(false);
-                onBlurTodo();
+                onBlurEditTodo();
               }}
               suppressContentEditableWarning={true}
             >
