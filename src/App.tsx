@@ -1,5 +1,5 @@
 import * as React from "react";
-import useSWR, { trigger } from "swr";
+import useSWR, { trigger, mutate } from "swr";
 import { fetchData } from "./client";
 import { TodoT } from "./types/Todo";
 import { HelloLaura } from "./components/HelloLaura";
@@ -11,10 +11,29 @@ import { Input } from "./components/Input/Input";
 const App: React.FC = () => {
   const { data, error } = useSWR<Array<TodoT>>("/todo", fetchData);
 
+  if (error) {
+    return <div>error!</div>;
+  }
+
+  if (!data) {
+    return <div>loading!</div>;
+  }
+
   const onTrash = async (id: string) => {
     try {
       await client.patch(`/todo/${id}`, { trash: true });
-      trigger("/todo");
+
+      const updatedTodo = data.map(todo => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            trash: true
+          };
+        }
+        return todo;
+      });
+
+      mutate("/todo", updatedTodo);
     } catch (err) {
       console.log(err);
     }
@@ -23,7 +42,18 @@ const App: React.FC = () => {
   const onComplete = async (id: string, completed: boolean) => {
     try {
       await client.patch(`/todo/${id}`, { completed });
-      trigger("/todo");
+
+      const updatedTodo = data.map(todo => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            completed
+          };
+        }
+        return todo;
+      });
+
+      mutate("/todo", updatedTodo);
     } catch (err) {
       console.log(err);
     }
@@ -40,20 +70,13 @@ const App: React.FC = () => {
 
   const onCreateTodo = async (description: string, categoryId: number | null) => {
     try {
-      await client.post("/todo/", { description, categoryId });
+      await client.post("/todo", { description, categoryId });
+
       trigger("/todo");
     } catch (err) {
       console.log(err);
     }
   };
-
-  if (error) {
-    return <div>error!</div>;
-  }
-
-  if (!data) {
-    return <div>loading!</div>;
-  }
 
   return (
     <>
@@ -64,7 +87,7 @@ const App: React.FC = () => {
         todos={data}
         onComplete={(id, completed) => onComplete(id, completed)}
         onTrash={onTrash}
-        onEditDescription={(id, description) => onEditDescription(id, description)}
+        onEditDescription={onEditDescription}
       />
     </>
   );

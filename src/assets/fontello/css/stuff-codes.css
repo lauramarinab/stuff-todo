@@ -1,4 +1,7 @@
 
+.icon-edit:before { content: '\e800'; } /* '' */
+.icon-trash:before { content: '\e801'; } /* '' */
+.icon-more:before { content: '\e802'; } /* '' */
 .icon-check-off:before { content: '\e804'; } /* '' */
 .icon-check-on:before { content: '\e805'; } /* '' */
 .icon-add:before { content: '\e806'; } /* '' */

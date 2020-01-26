@@ -228,12 +228,12 @@ body {
   display: none;
 }
 @font-face {
-      font-family: 'scheduler-icon';
-      src: url('./font/scheduler-icon.eot?45459317');
-      src: url('./font/scheduler-icon.eot?45459317#iefix') format('embedded-opentype'),
-           url('./font/scheduler-icon.woff?45459317') format('woff'),
-           url('./font/scheduler-icon.ttf?45459317') format('truetype'),
-           url('./font/scheduler-icon.svg?45459317#scheduler-icon') format('svg');
+      font-family: 'stuff';
+      src: url('./font/stuff.eot?57945144');
+      src: url('./font/stuff.eot?57945144#iefix') format('embedded-opentype'),
+           url('./font/stuff.woff?57945144') format('woff'),
+           url('./font/stuff.ttf?57945144') format('truetype'),
+           url('./font/stuff.svg?57945144#stuff') format('svg');
       font-weight: normal;
       font-style: normal;
     }
@@ -241,7 +241,7 @@ body {
      
     .demo-icon
     {
-      font-family: "scheduler-icon";
+      font-family: "stuff";
       font-style: normal;
       font-weight: normal;
       speak: none;
@@ -291,14 +291,19 @@ body {
   </head>
   <body>
     <div class="container header">
-      <h1>scheduler-icon <small>font demo</small></h1>
+      <h1>stuff <small>font demo</small></h1>
       <label class="switch">
         <input type="checkbox" onclick="toggleCodes(this.checked)">show codes
       </label>
     </div>
     <div class="container" id="icons">
       <div class="row">
+        <div class="the-icons span3" title="Code: 0xe800"><i class="demo-icon icon-edit">&#xe800;</i> <span class="i-name">icon-edit</span><span class="i-code">0xe800</span></div>
+        <div class="the-icons span3" title="Code: 0xe801"><i class="demo-icon icon-trash">&#xe801;</i> <span class="i-name">icon-trash</span><span class="i-code">0xe801</span></div>
+        <div class="the-icons span3" title="Code: 0xe802"><i class="demo-icon icon-more">&#xe802;</i> <span class="i-name">icon-more</span><span class="i-code">0xe802</span></div>
         <div class="the-icons span3" title="Code: 0xe804"><i class="demo-icon icon-check-off">&#xe804;</i> <span class="i-name">icon-check-off</span><span class="i-code">0xe804</span></div>
+      </div>
+      <div class="row">
         <div class="the-icons span3" title="Code: 0xe805"><i class="demo-icon icon-check-on">&#xe805;</i> <span class="i-name">icon-check-on</span><span class="i-code">0xe805</span></div>
         <div class="the-icons span3" title="Code: 0xe806"><i class="demo-icon icon-add">&#xe806;</i> <span class="i-name">icon-add</span><span class="i-code">0xe806</span></div>
         <div class="the-icons span3" title="Code: 0xe807"><i class="demo-icon icon-remove">&#xe807;</i> <span class="i-name">icon-remove</span><span class="i-code">0xe807</span></div>

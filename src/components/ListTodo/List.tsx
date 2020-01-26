@@ -1,9 +1,9 @@
 import * as React from "react";
-import { groupBy, omit, orderBy } from "lodash";
+import { groupBy, orderBy } from "lodash";
 import { TodoT } from "./../../types/Todo";
-import { TitleSection, GridList } from "./styles";
+import { GridList } from "./styles";
 import { ListBox } from "./ListBox";
-import { Todo } from "./Todo";
+import { v4 } from "uuid";
 
 const CATEGORY_NAME = "category_name";
 
@@ -17,38 +17,23 @@ interface Props {
 const List: React.FC<Props> = ({ todos, onComplete, onTrash, onEditDescription }) => {
   const allTodosGroupByCategoryName = groupBy(orderBy(todos, CATEGORY_NAME), CATEGORY_NAME);
 
-  const notCategorizedTodos = allTodosGroupByCategoryName["Tutte"];
-  const onlyCategorizedTodos = omit(allTodosGroupByCategoryName, "Tutte");
-
-  const todosGroupByCategories = Object.values(onlyCategorizedTodos);
+  const todosGroupByCategories = Object.values(allTodosGroupByCategoryName);
 
   return (
     <div style={{ marginTop: 50 }}>
-      <TitleSection>All to do</TitleSection>
-      <div style={{ marginTop: 10, width: "460px" }}>
-        {notCategorizedTodos.map(todo => (
-          <Todo
-            key={todo.id}
-            id={todo.id}
-            completed={todo.completed}
-            description={todo.description}
-            onComplete={onComplete}
-            onTrash={onTrash}
-            onEditDescription={onEditDescription}
-          />
-        ))}
-      </div>
-      <GridList>
-        {todosGroupByCategories.map((todos, i) => (
-          <ListBox
-            key={i}
-            todos={todos}
-            onComplete={onComplete}
-            onTrash={onTrash}
-            onEditDescription={onEditDescription}
-          />
-        ))}
-      </GridList>
+      {todosGroupByCategories && (
+        <GridList>
+          {todosGroupByCategories.map(todos => (
+            <ListBox
+              key={v4()}
+              todos={todos}
+              onComplete={onComplete}
+              onTrash={onTrash}
+              onEditDescription={onEditDescription}
+            />
+          ))}
+        </GridList>
+      )}
     </div>
   );
 };

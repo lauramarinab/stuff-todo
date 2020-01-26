@@ -4,6 +4,8 @@ import { fetchData } from "../client";
 import { Category } from "../types/Category";
 import styled, { css } from "styled-components";
 import { scrollbarVerticalStyle } from "./UI/ScrollbarStyle";
+import { Icon } from "./UI/Icon";
+import { TitleSection } from "./ListTodo/styles";
 
 const Wrapper = styled.div`
   display: flex;
@@ -48,12 +50,22 @@ const Li = styled.li<{ selected?: boolean }>`
   }
 `;
 
+const SelectedCategory = styled(TitleSection)`
+  margin: 20px 0px;
+  width: 460px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 interface Props {
   selectedCategory: number | null;
-  onSelectedCategory: (categoryId: number) => void;
+  onSelectedCategory: (categoryId: number | null) => void;
 }
 
 const AllCategoryBox: React.FC<Props> = ({ selectedCategory, onSelectedCategory }) => {
+  const [showCategories, setShowCategories] = React.useState(false);
+
   const { data, error } = useSWR<Array<Category>>("/category", fetchData);
 
   if (error) {
@@ -68,23 +80,46 @@ const AllCategoryBox: React.FC<Props> = ({ selectedCategory, onSelectedCategory 
     );
   }
 
+  const selectedCategoryName = data.find(c => c.id === selectedCategory);
+
+  const removeCategory = () => {
+    onSelectedCategory(null);
+    setShowCategories(false);
+  };
+
   return (
-    <Wrapper>
-      <Title>Scegli una categoria</Title>
-      <Box>
-        <Ul>
-          {data.map(category => (
-            <Li
-              key={category.id}
-              onClick={() => onSelectedCategory(category.id)}
-              selected={category.id === selectedCategory}
-            >
-              {category.name}
-            </Li>
-          ))}
-        </Ul>
-      </Box>
-    </Wrapper>
+    <>
+      <Wrapper>
+        {!selectedCategory && <Title onClick={() => setShowCategories(true)}>Scegli una categoria</Title>}
+        {selectedCategory && (
+          <SelectedCategory>
+            {selectedCategoryName?.name}
+            <Icon
+              name={showCategories ? "trash" : "edit"}
+              onClick={() => (showCategories ? removeCategory() : setShowCategories(true))}
+            />
+          </SelectedCategory>
+        )}
+        {showCategories && (
+          <Box>
+            <Ul>
+              {data.map(category => (
+                <Li
+                  key={category.id}
+                  onClick={() => {
+                    onSelectedCategory(category.id);
+                    setShowCategories(false);
+                  }}
+                  selected={category.id === selectedCategory}
+                >
+                  {category.name}
+                </Li>
+              ))}
+            </Ul>
+          </Box>
+        )}
+      </Wrapper>
+    </>
   );
 };
 
