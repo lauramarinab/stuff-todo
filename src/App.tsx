@@ -23,15 +23,7 @@ const App: React.FC = () => {
     try {
       await client.patch(`/todo/${id}`, { trash: true });
 
-      const updatedTodo = data.map(todo => {
-        if (todo.id === id) {
-          return {
-            ...todo,
-            trash: true
-          };
-        }
-        return todo;
-      });
+      const updatedTodo = data.filter(todo => todo.id !== id);
 
       mutate("/todo", updatedTodo);
     } catch (err) {
@@ -83,12 +75,7 @@ const App: React.FC = () => {
       <HelloLaura />
       <AnalysisTodo todos={data} />
       <Input onCreateTodo={onCreateTodo} />
-      <List
-        todos={data}
-        onComplete={(id, completed) => onComplete(id, completed)}
-        onTrash={onTrash}
-        onEditDescription={onEditDescription}
-      />
+      <List todos={data} onComplete={onComplete} onTrash={onTrash} onEditDescription={onEditDescription} />
     </>
   );
 };

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TodoT } from "../../types/Todo";
+import { TodoT, TodoActions } from "../../types/Todo";
 import { Todo } from "./Todo";
 import styled from "styled-components";
 import { TitleSection } from "./styles";
@@ -14,47 +14,40 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-interface Props {
+type Props = TodoActions & {
   todos: Array<TodoT>;
-  onComplete: (id: string, completed: boolean) => void;
-  onTrash: (id: string) => void;
-  onEditDescription: (id: string, description: string) => void;
-}
+  onOpenListDialog: () => void;
+};
 
-const ListBox: React.FC<Props> = ({ todos, onComplete, onTrash, onEditDescription }) => {
-  const [openDialog, setOpenDialog] = React.useState(false);
-
+const ListBox: React.FC<Props> = ({ todos, onComplete, onTrash, onEditDescription, onOpenListDialog }) => {
   const categoryName = todos[0].category_name;
 
   const maxTodos = todos.slice(0, 4);
 
   return (
-    <>
-      {openDialog && <div style={{ position: "absolute" }}>dialog is open!</div>}
-      <Wrapper>
-        <TitleSection>{categoryName}</TitleSection>
-        <div style={{ marginTop: 15 }}>
-          {maxTodos.map(todo => (
-            <Todo
-              key={todo.id}
-              id={todo.id}
-              completed={todo.completed}
-              description={todo.description}
-              onComplete={onComplete}
-              onTrash={onTrash}
-              onEditDescription={onEditDescription}
-            />
-          ))}
-        </div>
-        {todos.length > maxTodos.length && (
-          <Icon
-            style={{ alignSelf: "flex-end", position: "relative", bottom: 8, right: -6 }}
-            name="more"
-            onClick={() => setOpenDialog(true)}
+    <Wrapper>
+      <TitleSection>{categoryName}</TitleSection>
+      <div style={{ marginTop: 15 }}>
+        {maxTodos.map(todo => (
+          <Todo
+            key={todo.id}
+            id={todo.id}
+            completed={todo.completed}
+            description={todo.description}
+            onComplete={onComplete}
+            onTrash={onTrash}
+            onEditDescription={onEditDescription}
           />
-        )}
-      </Wrapper>
-    </>
+        ))}
+      </div>
+      {todos.length > maxTodos.length && (
+        <Icon
+          style={{ alignSelf: "flex-end", position: "relative", bottom: 8, right: -6 }}
+          name="more"
+          onClick={onOpenListDialog}
+        />
+      )}
+    </Wrapper>
   );
 };
 

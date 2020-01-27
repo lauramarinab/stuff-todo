@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled, { css } from "styled-components";
 
-type IconName = "remove" | "add" | "check-on" | "check-off" | "edit" | "trash" | "more";
+export type IconName = "remove" | "add" | "check-on" | "check-off" | "edit" | "trash" | "more";
 
 interface Props {
   name: IconName;

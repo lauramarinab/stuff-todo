@@ -41,7 +41,7 @@ const Todo: React.FC<Props> = ({ id, description, completed, onTrash, onComplete
         <TodoWrapper
           onDoubleClick={_ => setTodoIsEditable(true)}
           className={`wrapper-${status}`}
-          onMouseEnter={() => setOverlayButton(true)}
+          onMouseOver={() => setOverlayButton(true)}
           onMouseLeave={() => setOverlayButton(false)}
         >
           <div style={{ display: "flex", alignItems: "center" }}>
