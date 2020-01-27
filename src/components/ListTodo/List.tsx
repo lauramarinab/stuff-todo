@@ -10,9 +10,10 @@ const CATEGORY_NAME = "category_name";
 
 type Props = TodoActions & {
   todos: TodoT[];
+  onCreateTodo: (description: string, categoryId: number | null) => void;
 };
 
-const List: React.FC<Props> = ({ todos, onComplete, onTrash, onEditDescription }) => {
+const List: React.FC<Props> = ({ todos, onComplete, onTrash, onEditDescription, onCreateTodo }) => {
   const [openDialog, setOpenDialog] = React.useState(false);
   const [selectedList, setSelectedList] = React.useState<Array<TodoT> | null>();
 
@@ -32,6 +33,7 @@ const List: React.FC<Props> = ({ todos, onComplete, onTrash, onEditDescription }
           onComplete={onComplete}
           onTrash={onTrash}
           onEditDescription={onEditDescription}
+          onCreateTodo={onCreateTodo}
         />
       )}
       <div style={{ marginTop: 50 }}>

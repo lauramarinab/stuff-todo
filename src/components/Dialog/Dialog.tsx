@@ -2,17 +2,15 @@ import * as React from "react";
 import { createPortal } from "react-dom";
 import { v4 } from "uuid";
 import { useKeyUpEsc } from "../../hooks/useKeyUpEsc";
-import { Bkg, Wrapper, ButtonWrapper, CategoryName, Portal } from "./styles";
+import { Bkg, Wrapper, Portal } from "./styles";
 
 interface Props {
   open: boolean;
   onClose: () => void;
-  categoryName: string;
-  buttonSection: JSX.Element;
-  wrapperStyle?: React.CSSProperties;
+  portalStyle?: React.CSSProperties;
 }
 
-const Dialog: React.FC<Props> = ({ open, onClose, categoryName, buttonSection, wrapperStyle, children }) => {
+const Dialog: React.FC<Props> = ({ open, onClose, portalStyle, children }) => {
   const el = React.useRef<HTMLDivElement>(document.createElement("div"));
 
   React.useEffect(() => {
@@ -30,10 +28,8 @@ const Dialog: React.FC<Props> = ({ open, onClose, categoryName, buttonSection, w
 
   return createPortal(
     <Wrapper>
-      <Portal onClick={(e: any) => e.stopPropagation()} style={wrapperStyle}>
-        <CategoryName>{categoryName}</CategoryName>
+      <Portal onClick={(e: any) => e.stopPropagation()} style={portalStyle}>
         {children}
-        <ButtonWrapper>{buttonSection}</ButtonWrapper>
       </Portal>
       <Bkg open={open} onClick={onClose} />
     </Wrapper>,

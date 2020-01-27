@@ -1,12 +1,12 @@
 import * as React from "react";
+import client from "./client";
 import useSWR, { trigger, mutate } from "swr";
 import { fetchData } from "./client";
 import { TodoT } from "./types/Todo";
 import { HelloLaura } from "./components/HelloLaura";
 import { List } from "./components/ListTodo/List";
 import { AnalysisTodo } from "./components/AnalysisTodo";
-import client from "./client";
-import { Input } from "./components/Input/Input";
+import { AddTodoWithCategories } from "./components/Input/AddTodoWithCategories";
 
 const App: React.FC = () => {
   const { data, error } = useSWR<Array<TodoT>>("/todo", fetchData);
@@ -74,8 +74,14 @@ const App: React.FC = () => {
     <>
       <HelloLaura />
       <AnalysisTodo todos={data} />
-      <Input onCreateTodo={onCreateTodo} />
-      <List todos={data} onComplete={onComplete} onTrash={onTrash} onEditDescription={onEditDescription} />
+      <AddTodoWithCategories onCreateTodo={onCreateTodo} />
+      <List
+        todos={data}
+        onComplete={onComplete}
+        onTrash={onTrash}
+        onEditDescription={onEditDescription}
+        onCreateTodo={onCreateTodo}
+      />
     </>
   );
 };

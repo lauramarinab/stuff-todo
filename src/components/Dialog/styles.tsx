@@ -54,6 +54,7 @@ const ButtonWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  margin-top: 30px;
 `;
 
 const CategoryName = styled(TitleSection)`

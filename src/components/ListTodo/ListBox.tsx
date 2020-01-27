@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   padding: 15px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 `;
 
 type Props = TodoActions & {
@@ -19,34 +20,42 @@ type Props = TodoActions & {
   onOpenListDialog: () => void;
 };
 
+const MAX_LENGTH_TODOS = 4;
+
 const ListBox: React.FC<Props> = ({ todos, onComplete, onTrash, onEditDescription, onOpenListDialog }) => {
   const categoryName = todos[0].category_name;
 
-  const maxTodos = todos.slice(0, 4);
+  const maxTodos = todos.slice(0, MAX_LENGTH_TODOS);
 
   return (
     <Wrapper>
-      <TitleSection>{categoryName}</TitleSection>
-      <div style={{ marginTop: 15 }}>
-        {maxTodos.map(todo => (
-          <Todo
-            key={todo.id}
-            id={todo.id}
-            completed={todo.completed}
-            description={todo.description}
-            onComplete={onComplete}
-            onTrash={onTrash}
-            onEditDescription={onEditDescription}
-          />
-        ))}
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <TitleSection>{categoryName}</TitleSection>
+        <div style={{ marginTop: 15 }}>
+          {maxTodos.map(todo => (
+            <Todo
+              key={todo.id}
+              id={todo.id}
+              completed={todo.completed}
+              description={todo.description}
+              onComplete={onComplete}
+              onTrash={onTrash}
+              onEditDescription={onEditDescription}
+            />
+          ))}
+        </div>
       </div>
-      {todos.length > maxTodos.length && (
-        <Icon
-          style={{ alignSelf: "flex-end", position: "relative", bottom: 8, right: -6 }}
-          name="more"
-          onClick={onOpenListDialog}
-        />
-      )}
+      <Icon
+        style={{
+          alignSelf: "flex-end",
+          position: "relative",
+          bottom: todos.length >= MAX_LENGTH_TODOS ? 8 : -12,
+          right: -6,
+          transition: "all 0.3s"
+        }}
+        name="more"
+        onClick={onOpenListDialog}
+      />
     </Wrapper>
   );
 };
